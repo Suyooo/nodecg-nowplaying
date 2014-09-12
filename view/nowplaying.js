@@ -1,6 +1,11 @@
 // pass data straight into our function that handles it, preferred for simplicity
 nodecg.listenFor('updatemessage', updateMessage);
 
+	// edit these!
+	var titletime = 10;		// how long song title is displayed, in seconds
+	var msgtime = 5;		// how long sub message is displayed, in seconds
+	var update = 1;			// how often the title is updated, in seconds
+
 	var appear = false;
 	var curline = -1;
 	
@@ -11,7 +16,7 @@ nodecg.listenFor('updatemessage', updateMessage);
         if(msg) {
 			if (curline == -1) {
 				curline = 0;
-				setTimeout(toggleLines,10000);
+				setTimeout(toggleLines,titletime*1000);
 			}
 			$('#musicmessage').html(msg);
 		} else {
@@ -24,12 +29,12 @@ nodecg.listenFor('updatemessage', updateMessage);
 		}
     }
 	
-	setInterval(updateSong,1000);
+	setInterval(updateSong,update*1000);
 	function updateSong() {
 		$.get("nowplaying.txt",function(data,status){
 			if (status=="success") {
 				if (!appear) {
-					$('#container').transition({
+					$('#musiccontainer').transition({
 						'left': '0'
 					}, 1000, 'ease-out');
 					appear = true;
@@ -50,7 +55,7 @@ nodecg.listenFor('updatemessage', updateMessage);
 				'margin-top': '12px'
 			}, 300, 'ease-out');
 			curline = 1;
-			setTimeout(toggleLines,5000);
+			setTimeout(toggleLines,msgtime*1000);
 		} else if (curline==1) {
 			$('#musictitle').delay(150).transition({
 				'opacity': '1',
@@ -61,6 +66,6 @@ nodecg.listenFor('updatemessage', updateMessage);
 				'margin-top': '24px'
 			}, 300, 'ease-out');
 			curline = 0;
-			setTimeout(toggleLines,10000);
+			setTimeout(toggleLines,titletime*1000);
 		}
 	}

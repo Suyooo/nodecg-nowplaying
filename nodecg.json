@@ -1,0 +1,13 @@
+{
+  "name": "nowplaying",
+  "version": "1.0.0",
+  "homepage": "http://suyo.be/",
+  "authors": [
+    "Suyooo <me@suyo.be>"
+  ],
+  "description": "Shows the currently playing song from a file, and another message",
+  "resolutions": [
+    "720p"
+  ],
+  "license": "MIT"
+}

@@ -1,13 +1,25 @@
 $(document).on('ncgReady', function () {
-	nodecg.listenFor('updatemessage', updateMessage);
+	nodecg.listenFor('musicupdate', updateMessage);
+	nodecg.listenFor('musicshow', showMusic);
+	nodecg.listenFor('musichide', hideMusic);
 
 	// edit these!
 	var titletime = 10;		// how long song title is displayed, in seconds
 	var msgtime = 5;		// how long sub message is displayed, in seconds
 	var update = 1;			// how often the title is updated, in seconds
 
-	var appear = false;
 	var curline = -1;
+	
+	function showMusic(data) {
+		$('#musiccontainer').transition({
+			'left': '0'
+		}, 1000, 'ease-out');
+	}
+	function hideMusic(data) {
+		$('#musiccontainer').transition({
+			'left': '1280px'
+		}, 1000, 'ease-in');
+	}
 	
 	function updateMessage(data) {
         var msgParsed = JSON.parse(data);
@@ -33,12 +45,6 @@ $(document).on('ncgReady', function () {
 	function updateSong() {
 		$.get("nowplaying.txt",function(data,status){
 			if (status=="success") {
-				if (!appear) {
-					$('#musiccontainer').transition({
-						'left': '0'
-					}, 1000, 'ease-out');
-					appear = true;
-				}
 				$('#musictitle').html(data);
 			}
 		});

@@ -1,5 +1,5 @@
-// pass data straight into our function that handles it, preferred for simplicity
-nodecg.listenFor('updatemessage', updateMessage);
+$(document).on('ncgReady', function () {
+	nodecg.listenFor('updatemessage', updateMessage);
 
 	// edit these!
 	var titletime = 10;		// how long song title is displayed, in seconds
@@ -69,3 +69,4 @@ nodecg.listenFor('updatemessage', updateMessage);
 			setTimeout(toggleLines,titletime*1000);
 		}
 	}
+});

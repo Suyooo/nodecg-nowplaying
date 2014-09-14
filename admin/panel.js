@@ -4,6 +4,7 @@
    
     function prepMusic() {    
       var tData = {
+        "lastfm": $('#music-songsource').val(),
         "msg": $('#music-message').val()
       };  
       

@@ -1,17 +1,12 @@
-<div id="nowplaying" class="panel panel-default panel-span-2">
-    <div class="panel-heading">
-        <h3 class="panel-title">Now Playing</h3>
-        <i class="fa fa-music panel-icon"></i>
-    </div>
-    <div class="panel-body">
 		<div class="input-group">
 		  <span class="input-group-addon">last.fm</span>
-		  <input type="text" class="form-control" id="music-songsource" placeholder="Last.fm Name">
+		  <input type="text" class="form-control" id="music-songsource" placeholder="Last.fm Name" />
 		</div>
 		<div class="input-group">
 		  <span class="input-group-addon">Message</span>
-		  <input type="text" class="form-control" id="music-message" placeholder="Message">
+		  <input type="text" class="form-control" id="music-message" placeholder="Message" />
 		</div>
+		<input type="checkbox" id="music-autoenabled"> Show for <input style="width:2em" type="text" id="music-autointerval" value="10" />s on song change
         <button type="button" class="btn btn-xs btn-primary" style="width:100%;margin-top:4px;" id="musicupdate">Update "Now Playing"</button>
 		<div class="btn-group btn-group-justified" style="margin-top:4px;">
 		  <div class="btn-group" style="padding-right:2px;">
@@ -21,5 +16,3 @@
 			<button type="button" class="btn btn-xs btn-danger" id="musichide">Hide</button>
 		  </div>
 		</div>
-    </div>
-</div>

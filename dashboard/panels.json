@@ -1,0 +1,10 @@
+[
+  {
+    "name": "npPanel",
+    "title": "Now Playing",
+    "width": 2,
+    "file": "panel.html",
+    "faIcon": "fa-music",
+    "viewUrl": "/view/nowplaying/index.html"
+  }
+]

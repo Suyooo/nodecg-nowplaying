@@ -11,13 +11,25 @@ var lastsong = "";
 
 var curline = -1;
 var toggleto;
-	
+
 $(document).on('ncgReady', function () {
-	nodecg.listenFor('musicupdate', updateMusic);
-	nodecg.listenFor('musicshow', showMusic);
-	nodecg.listenFor('musichide', hideMusic);
-	
-	function showMusic(data) {
+	nodecg.declareSyncedVar({
+		name: 'isShowing',
+		intialValue: false,
+		setter: function(isShowing) {
+			isShowing ?
+				showMusic() :
+				hideMusic();
+		}
+	});
+
+	nodecg.declareSyncedVar({
+		name: 'musicinfo',
+		intialValue: {},
+		setter: updateMusic
+	});
+
+	function showMusic() {
 		updateSong();
 		if (showing==0) {
 			$('#musiccontainer').transition({
@@ -26,7 +38,7 @@ $(document).on('ncgReady', function () {
 			showing=1;
 		}
 	}
-	function hideMusic(data) {
+	function hideMusic() {
 		if (showing==1) {
 			$('#musiccontainer').transition({
 				'left': '1280px'
@@ -34,15 +46,13 @@ $(document).on('ncgReady', function () {
 			showing = 0;
 		}
 	}
-	
+
 	function updateMusic(data) {
-		var msgParsed = JSON.parse(data);
-		
-		songsource = msgParsed.lastfm;
-		
-        auto = msgParsed.auto;
-		
-        var msg = msgParsed.msg;
+		songsource = data.lastfm;
+
+        auto = data.auto;
+
+        var msg = data.msg;
         if(msg) {
 			if (curline == -1) {
 				curline = 0;
@@ -59,7 +69,7 @@ $(document).on('ncgReady', function () {
 			}
 		}
     }
-	
+
 	setInterval(updateSong,update*1000);
 	function updateSong() {
 		if (songsource=="") {

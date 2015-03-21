@@ -1,7 +1,7 @@
 {
   "name": "nowplaying",
   "version": "1.2.0",
-  "nodecgDependency": "^0.3.0",
+  "nodecgDependency": "^0.5",
   "homepage": "http://suyo.be/",
   "authors": [
     "Suyooo <me@suyo.be>"

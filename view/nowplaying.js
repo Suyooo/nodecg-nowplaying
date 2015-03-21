@@ -12,7 +12,7 @@ var lastsong = "";
 var curline = -1;
 var toggleto;
 
-$(document).on('ncgReady', function () {
+$(document).ready(function () {
 	nodecg.declareSyncedVar({
 		name: 'isShowing',
 		intialValue: false,

@@ -11,24 +11,22 @@ var lastsong = "";
 
 var curline = -1;
 var toggleto;
+var autotoggleto;
+var autohideto;
 
 $(document).ready(function () {
-	nodecg.declareSyncedVar({
-		name: 'isShowing',
-		intialValue: false,
-		setter: function(isShowing) {
-			isShowing ?
+	nodecg.Replicant('isShowing')
+        .on('change', function(oldVal, newVal) {
+            newVal ?
 				showMusic() :
 				hideMusic();
-		}
-	});
+        });
 
-	nodecg.declareSyncedVar({
-		name: 'musicinfo',
-		intialValue: {},
-		setter: updateMusic
-	});
-
+	nodecg.Replicant('musicinfo')
+        .on('change', function(oldVal, newVal) {
+            updateMusic(newVal);
+        });
+        
 	function showMusic() {
 		updateSong();
 		if (showing==0) {
@@ -92,8 +90,10 @@ $(document).ready(function () {
 			}
 			showMusic();
 			clearTimeout(toggleto);
-			setTimeout(toggleLines,auto*600);
-			setTimeout(hideMusic,auto*1000);
+			clearTimeout(autotoggleto);
+			clearTimeout(autohideto);
+			autotoggleto = setTimeout(toggleLines,auto*600);
+			autohideto = setTimeout(hideMusic,auto*1000);
 		}
 		lastsong = song;
 	}
@@ -109,7 +109,7 @@ $(document).ready(function () {
 				'margin-top': '8px'
 			}, 300, 'ease-out');
 			curline = 1;
-			toggleto=setTimeout(toggleLines,msgtime*1000);
+			if (auto==0) toggleto=setTimeout(toggleLines,msgtime*1000);
 		} else if (curline==1) {
 			$('#musictitle').delay(150).transition({
 				'opacity': '1',
@@ -120,7 +120,7 @@ $(document).ready(function () {
 				'margin-top': '20px'
 			}, 300, 'ease-out');
 			curline = 0;
-			toggleto=setTimeout(toggleLines,titletime*1000);
+			if (auto==0) toggleto=setTimeout(toggleLines,titletime*1000);
 		}
 	}
 });

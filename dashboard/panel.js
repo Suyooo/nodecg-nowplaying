@@ -2,29 +2,23 @@
     var hideBtn = $('#musichide');
     var updateBtn = $('#musicupdate');
 
-    updateBtn.click(function() { nodecg.variables.musicinfo = prepMusic(); });
-    showBtn.click(function() { nodecg.variables.isShowing = true; });
-    hideBtn.click(function() { nodecg.variables.isShowing = false; });
+    updateBtn.click(function() { Rmusicinfo.value = prepMusic(); });
+    showBtn.click(function() { RisShowing.value = true; });
+    hideBtn.click(function() { RisShowing.value = false; });
 
-    nodecg.declareSyncedVar({
-        name: 'isShowing',
-        initialValue: false,
-        setter: function (isShowing) {
-            showBtn.prop('disabled', isShowing);
-            hideBtn.prop('disabled', !isShowing);
-        }
-    });
+    var RisShowing = nodecg.Replicant('isShowing')
+        .on('change', function(oldVal, newVal) {
+            showBtn.prop('disabled', newVal);
+            hideBtn.prop('disabled', !newVal);
+        });
 
-    nodecg.declareSyncedVar({
-        name: 'musicinfo',
-        initialValue: {},
-        setter: function (info) {
-            $('#music-songsource').val(info.lastfm);
-            $('#music-message').val(info.msg);
-            $('#music-autointerval').val(info.auto);
-            $('#music-autoenabled').prop('checked', info.auto !== 0);
-        }
-    });
+    var Rmusicinfo = nodecg.Replicant('musicinfo')
+        .on('change', function(oldVal, newVal) {
+            $('#music-songsource').val(newVal.lastfm);
+            $('#music-message').val(newVal.msg);
+            $('#music-autointerval').val(newVal.auto);
+            $('#music-autoenabled').prop('checked', newVal.auto !== 0);
+        });
 
     function prepMusic() {
         return {

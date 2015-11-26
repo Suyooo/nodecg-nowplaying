@@ -24,9 +24,9 @@ Create the configuration file in `cfg/nowplaying.json`. Default values are the o
   "apikey": null
 }
 ```
-* *titletime* is the time in seconds the music title should be displayed before switching the the message, if one is set.  
-* *msgtime* is the time in seconds the message is shown before switching back.
-* *update* is the interval between checking the file or requesting the current song from the API, in seconds.
-* *apikey* is your last.fm API key.
+* `titletime` is the time in seconds the music title should be displayed before switching the the message, if one is set.  
+* `msgtime` is the time in seconds the message is shown before switching back.
+* `update` is the interval between checking the file or requesting the current song from the API, in seconds.
+* `apikey` is your last.fm API key.
 
 You may also want to edit `view/nowplaying.css` and change the `top` value of `.musiccontainer` so it aligns nicely with your layout.

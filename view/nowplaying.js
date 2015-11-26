@@ -1,8 +1,11 @@
 // edit these!
-var titletime = 10;		// how long song title is displayed, in seconds
-var msgtime = 5;		// how long sub message is displayed, in seconds
-var update = 1;			// how often the title is updated, in seconds
-var apikey = "";		// your last.fm API key (last.fm/api)
+var titletime = nodecg.bundleConfig.titletime;	// how long song title is displayed, in seconds
+if (titletime==undefined) titletime = 10;
+var msgtime = nodecg.bundleConfig.msgtime;		// how long sub message is displayed, in seconds
+if (msgtime==undefined) msgtime = 5;
+var update = nodecg.bundleConfig.update;		// how often the title is updated, in seconds
+if (update==undefined) update = 1;
+var apikey = nodecg.bundleConfig.apikey;		// your last.fm API key (last.fm/api)
 
 var auto = 0;
 var showing = 0;
